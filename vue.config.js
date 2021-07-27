@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  outputPath: './build',
+  outputDir: './build',
   // 第一种配置方式
   // configureWebpack: {
   //   resolve: {
@@ -11,10 +11,16 @@ module.exports = {
   //   }
   // }
   // 第二种配置
-  configureWebpack: (config) => {
-    config.resolve.alias = {
-      '@': path.resolve(__dirname, 'src'),
-      components: '@/components'
-    }
+  // configureWebpack: (config) => {
+  //   config.resolve.alias = {
+  //     '@': path.resolve(__dirname, 'src'),
+  //     components: '@/components'
+  //   }
+  // }
+  // 第三种配置方式
+  chainWebpack: (config) => {
+    config.resolve.alias
+      .set('@', path.resolve(__dirname, 'src'))
+      .set('components', '@/components')
   }
 }
