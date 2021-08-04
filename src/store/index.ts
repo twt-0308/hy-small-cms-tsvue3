@@ -2,7 +2,9 @@ import { createStore } from 'vuex'
 
 const store = createStore({
   state: () => {
-    return {}
+    return {
+      name: 'Hello'
+    }
   }
 })
 
