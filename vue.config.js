@@ -22,5 +22,22 @@ module.exports = {
     config.resolve.alias
       .set('@', path.resolve(__dirname, 'src'))
       .set('components', '@/components')
+    config.module
+      .rule('pug')
+      .test(/\.pug$/)
+      .use('pug-html-loader')
+      .loader('pug-html-loader')
+      .end()
+  },
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://152.136.185.210:5000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        changeOrigin: true
+      }
+    }
   }
 }

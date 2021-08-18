@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
 import { registerApp } from '@/global'
-import hyRequest from '@/service'
 import 'normalize.css'
 import '@/assets/css/index.less'
+import { setupStore } from '@/store'
 
 const app = createApp(App)
 
@@ -15,12 +15,9 @@ app.use(registerApp) // 第二种写法
 app.use(router)
 app.use(store)
 app.mount('#app')
+setupStore()
 
-interface dataType {
-  data: any
-  returnCode: string
-  success: true
-}
+/*
 hyRequest
   .get<dataType>({
     url: '/home/multidata',
@@ -41,3 +38,4 @@ hyRequest
     console.log(res.success)
     console.log(res.returnCode)
   })
+*/

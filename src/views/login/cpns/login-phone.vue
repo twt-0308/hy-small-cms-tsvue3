@@ -1,6 +1,11 @@
 <template>
   <div class="login-phone">
-    <el-form label-width="70px" :rules="phoneRules" :model="account">
+    <el-form
+      label-width="70px"
+      :rules="phoneRules"
+      :model="account"
+      ref="formRef"
+    >
       <el-form-item label="手机号" prop="phone">
         <el-input v-model="account.phone" />
       </el-form-item>
@@ -17,8 +22,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { phoneRules } from '@/views/login/config/account-config'
+import { ElForm } from 'element-plus'
 
 export default defineComponent({
   setup() {
@@ -26,9 +32,19 @@ export default defineComponent({
       phone: '',
       code: ''
     })
+    const formRef = ref<InstanceType<typeof ElForm>>()
+    const loginAction = () => {
+      formRef.value?.validate((valid) => {
+        if (valid) {
+          console.log(account, valid)
+        }
+      })
+    }
     return {
       account,
-      phoneRules
+      formRef,
+      phoneRules,
+      loginAction
     }
   }
 })
